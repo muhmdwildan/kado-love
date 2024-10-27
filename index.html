@@ -1,78 +1,72 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Kado Love</title>
-  <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
-  <style>
-    /* Styling Kado */
-    .gift-box {
-      transition: transform 0.5s ease-in-out;
-    }
-    .gift-box:hover {
-      transform: scale(1.05);
-    }
-
-    /* Styling untuk Love */
-    .love {
-      position: absolute;
-      color: #ff4d6d;
-      font-size: 2rem;
-      opacity: 0;
-      animation: float 3s ease-in-out infinite, fade 3s ease-in-out infinite;
-    }
-
-    /* Animasi Love */
-    @keyframes float {
-      0% { transform: translateY(0); }
-      100% { transform: translateY(-150px); }
-    }
-    
-    @keyframes fade {
-      0%, 100% { opacity: 0; }
-      50% { opacity: 1; }
-    }
-  </style>
-</head>
-<body class="flex items-center justify-center min-h-screen bg-pink-100 relative overflow-hidden">
-  <!-- Container Kado -->
-  <div id="gift-container" class="text-center space-y-6">
-    <!-- Kotak Kado -->
-    <div id="gift-box" class="gift-box w-40 h-40 bg-purple-500 rounded-lg shadow-lg flex items-center justify-center cursor-pointer">
-      <span class="text-white text-2xl font-bold">🎁</span>
-    </div>
-    <p class="text-lg font-semibold text-gray-700">Klik untuk membuka kado spesial</p>
-  </div>
-
-  <script>
-    // Seleksi elemen kado
-    const giftBox = document.getElementById('gift-box');
-    const giftContainer = document.getElementById('gift-container');
-
-    // Fungsi untuk membuat elemen love
-    function createLove() {
-      const love = document.createElement('span');
-      love.textContent = '❤️';
-      love.classList.add('love');
-
-      // Posisi acak untuk love
-      love.style.left = `${Math.random() * 100}vw`;
-      love.style.animationDuration = `${Math.random() * 2 + 2}s`;
-      
-      document.body.appendChild(love);
-
-      // Hapus love setelah animasi selesai
-      setTimeout(() => love.remove(), 3000);
-    }
-
-    // Event untuk klik kado
-    giftBox.addEventListener('click', () => {
-      // Membuat beberapa love
-      for (let i = 0; i < 30; i++) {
-        setTimeout(createLove, i * 100);
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Kangen Gak?</title>
+    <link
+      href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css"
+      rel="stylesheet"
+    />
+    <style>
+      .random-move {
+        position: absolute;
+        transition: all 0.3s ease;
       }
-    });
-  </script>
-</body>
+    </style>
+  </head>
+  <body
+    class="flex items-center justify-center min-h-screen bg-pink-100 text-gray-800"
+  >
+    <div class="text-center space-y-6">
+      <h1 class="text-2xl md:text-4xl font-bold">Kamu gak kangen aku?</h1>
+
+      <div class="space-x-4 mt-4">
+        <button
+          id="yes-btn"
+          class="px-4 py-2 bg-green-500 text-white font-semibold rounded-lg shadow-md hover:bg-green-600 transition"
+        >
+          Iya, kangen 😘
+        </button>
+        <button
+          id="no-btn"
+          class="px-4 py-2 bg-red-500 text-white font-semibold rounded-lg shadow-md random-move hover:bg-red-600 transition"
+        >
+          Gak 😶
+        </button>
+      </div>
+
+      <p id="response" class="mt-6 text-xl font-semibold"></p>
+      <a
+        id="whatsapp-btn"
+        href="#"
+        target="_blank"
+        class="hidden mt-4 px-6 py-3 bg-green-500 text-white font-semibold rounded-lg shadow-md hover:bg-green-600 transition"
+        >Balas di WhatsApp</a
+      >
+    </div>
+
+    <script>
+      const yesBtn = document.getElementById("yes-btn");
+      const noBtn = document.getElementById("no-btn");
+      const response = document.getElementById("response");
+      const whatsappBtn = document.getElementById("whatsapp-btn");
+
+      const phoneNumber = "085793958861";
+      const message = encodeURIComponent("Hai, aku kangen kamu juga! ❤️");
+
+      yesBtn.addEventListener("click", () => {
+        response.textContent = "Aww, aku juga kangen banget sama kamu! ❤️";
+        whatsappBtn.href = `https://wa.me/${phoneNumber}?text=${message}`;
+        whatsappBtn.classList.remove("hidden");
+      });
+
+      noBtn.addEventListener("click", () => {
+        response.textContent = "Yakin gak kangen? 😢";
+
+        noBtn.style.top = `${Math.random() * 80}vh`;
+        noBtn.style.left = `${Math.random() * 80}vw`;
+      });
+    </script>
+  </body>
 </html>
